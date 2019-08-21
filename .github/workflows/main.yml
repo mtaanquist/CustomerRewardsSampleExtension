@@ -32,7 +32,7 @@ jobs:
           -updateHosts 
           -doNotExportObjectsToText 
           -enableSymbolLoading
-#         -additionalParameters @("--volume ""$Env:GITHUB_WORKSPACE`:$Env:GITHUB_WORKSPACE""")
+          -additionalParameters @("--volume $Env:GITHUB_WORKSPACE`:c:\project")
         shell: powershell
       - name: Build application
         env:
@@ -42,7 +42,7 @@ jobs:
           Compile-AppInBCContainer 
           -containerName bcdev 
           -credential ([PSCredential]::new($Env:USERNAME, (ConvertTo-SecureString -String $Env:PASSWORD -AsPlainText -Force))) 
-#         -appProjectFolder $Env:GITHUB_WORKSPACE
-#         -appOutputFolder $Env:GITHUB_WORKSPACE
+          -appProjectFolder $Env:GITHUB_WORKSPACE
+          -appOutputFolder $Env:GITHUB_WORKSPACE
           -updateSymbols
         shell: powershell
