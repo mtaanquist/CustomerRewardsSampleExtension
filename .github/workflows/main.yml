@@ -32,7 +32,6 @@ jobs:
           -updateHosts 
           -doNotExportObjectsToText 
           -enableSymbolLoading
-          -additionalParameters --volume $Env:GITHUB_WORKSPACE:C:\Agent
         shell: powershell
       - name: Build application
         env:
@@ -43,4 +42,6 @@ jobs:
           -containerName bcdev 
           -credential ([PSCredential]::new($Env:USERNAME, (ConvertTo-SecureString -String $Env:PASSWORD -AsPlainText -Force))) 
           -appProjectFolder $Env:GITHUB_WORKSPACE
+          -appOutputFolder $Env:GITHUB_WORKSPACE
+          -updateSymbols
         shell: powershell
