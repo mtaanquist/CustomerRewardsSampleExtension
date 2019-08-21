@@ -16,6 +16,36 @@ jobs:
       - name: List workspace
         run: ls $Env:GITHUB_WORKSPACE
         shell: powershell
+      - name: Test sharing
+        env:
+          USERNAME: ${{ secrets.BA_USERNAME }}
+          PASSWORD: ${{ secrets.BA_PASSWORD }}      
+        run: >
+          docker run `
+          --name bcdev `
+          --hostname bcdev `
+          --env auth=NavUserPassword `
+          --env username="$Env:USERNAME" `
+          --env ExitOnError=N `
+          --env locale=en-US `
+          --env licenseFile="" `
+          --env databaseServer="" `
+          --env databaseInstance="" `
+          --volume "C:\ProgramData\NavContainerHelper:C:\ProgramData\NavContainerHelper" `
+          --volume "C:\ProgramData\NavContainerHelper\Extensions\bcdev\my:C:\Run\my" `
+          --isolation process `
+          --restart unless-stopped `
+          --env enableApiServices=Y `
+          --env enableSymbolLoading=Y `
+          --env useSSL=N `
+          --volume "c:\windows\system32\drivers\etc:C:\driversetc" `
+          --env securePassword=76492d1116743f0423413b16050a5345MgB8AHMAcwBWADAAZwAvAE4AcgBrAHMAcQBlAGsAaQBFADMAVQBuAGUAcQB5AEEAPQA9AHwAMAA4AGEAMAA0ADEAMgBmADAAOQA4AGYAYwA3ADUAOABiAGMAYQBmADUANwA2ADMAYwA4AGYAYQBkAGEAYwA3ADYAMgAxADMAMAAyADkANwBkADQAMgA2ADAANgAxADIAOQAwADMAYQAyADgAYQAwAGMAMABkADIANwA2ADMAYwA4ADcAMwA0AGMAYQA2ADQAMABjADgAYwAwADQAYQBhADYANgBiAGYANwBkADEAOABlAGMAYgA0AGIANwA0ADUAMgA3ADEAOAA5ADcANABmADMAZgBiAGQAZQA5ADMAYgAxADcAYgBjADQAYwA2AGMAOABmAGMANgBmADIAZgAzAA== `
+          --env passwordKeyFile="c:\run\my\aes.key" `
+          --env removePasswordKeyFile=Y `
+          --volume ""$Env:GITHUB_WORKSPACE`:$Env:GITHUB_WORKSPACE""" `
+          --env accept_eula=Y `
+          --detach mcr.microsoft.com/businesscentral/onprem:latest-ltsc2019         
+        shell: powershell
       - name: Set up Business Central container
         env:
           USERNAME: ${{ secrets.BA_USERNAME }}
