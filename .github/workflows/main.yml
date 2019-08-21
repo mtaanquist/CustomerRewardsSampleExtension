@@ -32,6 +32,7 @@ jobs:
           -updateHosts 
           -doNotExportObjectsToText 
           -enableSymbolLoading
+          -additionalParameters --volume $Env:GITHUB_WORKSPACE:C:\Agent
         shell: powershell
       - name: Build application
         env:
