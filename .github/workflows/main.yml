@@ -4,10 +4,15 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: windows-latest
-    
     steps:
-    - uses: powershell
-    - name: Run a one-line script
-      run: echo Hello, world!
+      - name: hello_world
+        run: echo Hello, world!
+        shell: powershell
+      - name: install_navcontainerhelper
+        run: Install-Module NavContainerHelper -Force
+        shell: powershell
+      - name: get_module_navcontainerhelper
+        run: Get-Module NavContainerHelper
+        shell: powershell
+        
