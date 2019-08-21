@@ -32,7 +32,7 @@ jobs:
           -updateHosts 
           -doNotExportObjectsToText 
           -enableSymbolLoading
-          -additionalParameters @("-v $Env:GITHUB_WORKSPACE\:$Env:GITHUB_WORKSPACE")
+          -additionalParameters @("-v d:\a\CustomerRewardsSampleExtension\CustomerRewardsSampleExtension\:d:\a\CustomerRewardsSampleExtension\CustomerRewardsSampleExtension")
         shell: powershell
       - name: Build application
         env:
