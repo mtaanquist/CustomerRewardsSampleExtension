@@ -17,11 +17,26 @@ jobs:
         env:
           USERNAME: ${{ secrets.BA_USERNAME }}
           PASSWORD: ${{ secrets.BA_PASSWORD }}
-        run: New-NavContainer -accept_eula -containerName bcdev -imageName mcr.microsoft.com/businesscentral/onprem:latest -useBestContainerOS -alwaysPull -auth NavUserPassword -credential ([PSCredential]::new($USERNAME, (ConvertTo-SecureString -String $PASSWORD -AsPlainText -Force))) -updateHosts -doNotExportObjectsToText -enableSymbolLoading
+        run: >
+          New-NavContainer 
+          -accept_eula 
+          -containerName bcdev 
+          -imageName mcr.microsoft.com/businesscentral/onprem:latest 
+          -useBestContainerOS 
+          -alwaysPull 
+          -auth NavUserPassword 
+          -credential ([PSCredential]::new("$USERNAME", (ConvertTo-SecureString -String "$PASSWORD" -AsPlainText -Force))) 
+          -updateHosts 
+          -doNotExportObjectsToText 
+          -enableSymbolLoading
         shell: powershell
       - name: Build application
         env:
           USERNAME: ${{ secrets.BA_USERNAME }}
           PASSWORD: ${{ secrets.BA_PASSWORD }}    
-        run: Compile-AppInBCContainer -containerName bcdev -credential ([PSCredential]::new($USERNAME, (ConvertTo-SecureString -String $PASSWORD -AsPlainText -Force))) -buildProjectFolder $GITHUB_WORKSPACE
+        run: >
+          Compile-AppInBCContainer 
+          -containerName bcdev 
+          -credential ([PSCredential]::new("$USERNAME", (ConvertTo-SecureString -String "$PASSWORD" -AsPlainText -Force))) 
+          -buildProjectFolder "$GITHUB_WORKSPACE"
         
