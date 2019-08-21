@@ -18,6 +18,7 @@ jobs:
           USERNAME: {{ secrets.BA_USERNAME }}
           PASSWORD: {{ secrets.BA_PASSWORD }}        
         run: echo User: "$USERNAME", pass: "$PASSWORD"
+        shell: powershell
       - name: Set up Business Central container
         env:
           USERNAME: {{ secrets.BA_USERNAME }}
