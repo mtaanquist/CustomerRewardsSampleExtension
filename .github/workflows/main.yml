@@ -13,30 +13,7 @@ jobs:
       - name: Get module NavContainerHelper
         run: Get-Module NavContainerHelper
         shell: powershell
-      - name: Set up Business Central container
-        env:
-          USERNAME: ${{ secrets.BA_USERNAME }}
-          PASSWORD: ${{ secrets.BA_PASSWORD }}
-        run: >
-          New-NavContainer 
-          -accept_eula 
-          -containerName bcdev 
-          -imageName mcr.microsoft.com/businesscentral/onprem:latest 
-          -useBestContainerOS 
-          -alwaysPull 
-          -auth NavUserPassword 
-          -credential ([PSCredential]::new($Env:USERNAME, (ConvertTo-SecureString -String $Env:PASSWORD -AsPlainText -Force))) 
-          -updateHosts 
-          -doNotExportObjectsToText 
-          -enableSymbolLoading
+      - name: List workspace
+        run: ls $Env:GITHUB_WORKSPACE
         shell: powershell
-      - name: Build application
-        env:
-          USERNAME: ${{ secrets.BA_USERNAME }}
-          PASSWORD: ${{ secrets.BA_PASSWORD }}    
-        run: >
-          Compile-AppInBCContainer 
-          -containerName bcdev 
-          -credential ([PSCredential]::new($Env:USERNAME, (ConvertTo-SecureString -String $Env:PASSWORD -AsPlainText -Force))) 
-          -buildProjectFolder $Env:GITHUB_WORKSPACE
-        shell: powershell
+
