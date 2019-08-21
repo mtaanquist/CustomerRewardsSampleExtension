@@ -13,6 +13,12 @@ jobs:
       - name: Get module NavContainerHelper
         run: Get-Module NavContainerHelper
         shell: powershell
+      - name: Test secrets
+        run: echo Hello ${USERNAME}!
+        env:
+          USERNAME: ${{ secrets.BA_USERNAME }}
+          PASSWORD: ${{ secrets.BA_PASSWORD }}        
+        shell: powershell
       - name: Set up Business Central container
         env:
           USERNAME: ${{ secrets.BA_USERNAME }}
