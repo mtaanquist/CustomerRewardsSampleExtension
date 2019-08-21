@@ -26,6 +26,7 @@ jobs:
           -containerName bcdev 
           -imageName mcr.microsoft.com/businesscentral/onprem:latest 
           -useBestContainerOS 
+          -isolation hyperv
           -alwaysPull 
           -auth NavUserPassword 
           -credential ([PSCredential]::new($Env:USERNAME, (ConvertTo-SecureString -String $Env:PASSWORD -AsPlainText -Force))) 
