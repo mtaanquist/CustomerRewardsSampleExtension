@@ -1,0 +1,28 @@
+{
+  "id": "",
+  "name": "",
+  "publisher": "",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "logo": "assets/images/logo.png",
+  "dependencies": [],
+  "features": [
+    "TranslationFile"
+  ],
+  "platform": "14.0.0.0",
+  "application": "14.0.0.0",
+  "idRanges": [
+    {
+      "from": 0,
+      "to": 0
+    }
+  ],
+  "showMyCode": false,
+  "target": "Internal",
+  "supportedLocales": [
+    "en-US",
+    "da-DK"
+  ],
+  "runtime": "3.2"
+}

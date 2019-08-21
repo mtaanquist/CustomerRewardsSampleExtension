@@ -1,0 +1,21 @@
+{
+    "al.CompilationOptions": {
+        "parallel": true
+    },
+    "al.assemblyProbingPaths": [
+        "./.netpackages",
+        "./libs",
+        "C:/Windows/assembly"
+    ],
+    "al.codeAnalyzers": [
+        "${CodeCop}",
+        "${AppSourceCop}"
+    ],
+    "al.ruleSetPath": "assets/rulesets/Company.ruleset.json",
+    "al.enableCodeAnalysis": true,
+    "editor.formatOnSave": true,
+    "editor.autoIndent": true,
+    "editor.detectIndentation": false,
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true
+}

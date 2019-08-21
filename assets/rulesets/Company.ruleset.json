@@ -1,0 +1,21 @@
+{
+    "name": "Company ruleset",
+    "description": "Ruleset for Consortio IT ApS",
+    "rules": [
+        {
+            "id": "AA0003",
+            "action": "Error",
+            "justification": "This diagnostic helps to improve readability. It must be respected in all cases."
+        },
+        {
+            "id": "AA0008",
+            "action": "Error",
+            "justification": "This diagnostic helps to improve readability. It must be respected in all cases."
+        },
+        {
+            "id": "AA0013",
+            "action": "Error",
+            "justification": "This diagnostic helps to improve readability. It must be respected in all cases."
+        }
+    ]
+}
