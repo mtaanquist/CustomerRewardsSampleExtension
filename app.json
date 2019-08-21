@@ -1,7 +1,7 @@
 {
-  "id": "",
-  "name": "",
-  "publisher": "",
+  "id": "5c55e1cc-ba6d-46cb-9665-3fd6b7e2d7a1",
+  "name": "Customer Rewards",
+  "publisher": "Mads Taanquist",
   "version": "1.0.0.0",
   "brief": "",
   "description": "",
@@ -14,8 +14,8 @@
   "application": "14.0.0.0",
   "idRanges": [
     {
-      "from": 0,
-      "to": 0
+      "from": 50100,
+      "to": 50149
     }
   ],
   "showMyCode": false,
