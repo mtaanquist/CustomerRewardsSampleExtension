@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: windows-2019
     steps:
       - uses: actions/checkout@v1    
       - name: Install NavContainerHelper
@@ -32,7 +32,7 @@ jobs:
           -updateHosts 
           -doNotExportObjectsToText 
           -enableSymbolLoading
-          -additionalParameters @("-v d:\a\CustomerRewardsSampleExtension\CustomerRewardsSampleExtension\:d:\a\CustomerRewardsSampleExtension\CustomerRewardsSampleExtension")
+          -additionalParameters @("--volume ""$Env:GITHUB_WORKSPACE`:$Env:GITHUB_WORKSPACE""")
         shell: powershell
       - name: Build application
         env:
