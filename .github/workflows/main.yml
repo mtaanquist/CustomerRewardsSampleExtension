@@ -6,13 +6,22 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - name: hello_world
-        run: echo Hello, world!
-        shell: powershell
-      - name: install_navcontainerhelper
+      - uses: actions/checkout@v1    
+      - name: Install NavContainerHelper
         run: Install-Module NavContainerHelper -Force
         shell: powershell
-      - name: get_module_navcontainerhelper
+      - name: Get module NavContainerHelper
         run: Get-Module NavContainerHelper
         shell: powershell
+      - name: Set up Business Central container
+        env:
+          USERNAME: buildagent
+          PASSWORD: buildagent6400!
+        run: New-NavContainer -accept_eula -containerName bcdev -imageName mcr.microsoft.com/businesscentral/onprem:latest -useBestContainerOS -alwaysPull -auth NavUserPassword -credential ([PSCredential]::new("$USERNAME", (ConvertTo-SecureString -String "$PASSWORD" -AsPlainText -Force))) -updateHosts -doNotExportObjectsToText -enableSymbolLoading
+        shell: powershell
+      - name: Build application
+        env:
+          USERNAME: buildagent
+          PASSWORD: buildagent6400!      
+        run: Compile-AppInBCContainer -containerName bcdev -credential ([PSCredential]::new("$USERNAME", (ConvertTo-SecureString -String "$PASSWORD" -AsPlainText -Force))) -buildProjectFolder "$GITHUB_WORKSPACE"
         
