@@ -13,12 +13,6 @@ jobs:
       - name: Get module NavContainerHelper
         run: Get-Module NavContainerHelper
         shell: powershell
-      - name: Test secrets
-        run: echo Hello ${USERNAME}!
-        env:
-          USERNAME: ${{ secrets.BA_USERNAME }}
-          PASSWORD: ${{ secrets.BA_PASSWORD }}        
-        shell: powershell
       - name: Set up Business Central container
         env:
           USERNAME: ${{ secrets.BA_USERNAME }}
@@ -31,7 +25,7 @@ jobs:
           -useBestContainerOS 
           -alwaysPull 
           -auth NavUserPassword 
-          -credential ([PSCredential]::new(${USERNAME}, (ConvertTo-SecureString -String ${PASSWORD} -AsPlainText -Force))) 
+          -credential ([PSCredential]::new($Env:USERNAME, (ConvertTo-SecureString -String $Env:PASSWORD -AsPlainText -Force))) 
           -updateHosts 
           -doNotExportObjectsToText 
           -enableSymbolLoading
@@ -43,6 +37,6 @@ jobs:
         run: >
           Compile-AppInBCContainer 
           -containerName bcdev 
-          -credential ([PSCredential]::new(${USERNAME}, (ConvertTo-SecureString -String ${PASSWORD} -AsPlainText -Force))) 
-          -buildProjectFolder ${GITHUB_WORKSPACE}
+          -credential ([PSCredential]::new($Env:USERNAME, (ConvertTo-SecureString -String $Env:PASSWORD -AsPlainText -Force))) 
+          -buildProjectFolder $Env:GITHUB_WORKSPACE
         
