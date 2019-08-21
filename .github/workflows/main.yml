@@ -39,4 +39,4 @@ jobs:
           -containerName bcdev 
           -credential ([PSCredential]::new($Env:USERNAME, (ConvertTo-SecureString -String $Env:PASSWORD -AsPlainText -Force))) 
           -buildProjectFolder $Env:GITHUB_WORKSPACE
-        
+        shell: powershell
