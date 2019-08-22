@@ -48,7 +48,7 @@ jobs:
           Publish-NavContainerApp 
           -containerName bcdev 
           -credential ([PSCredential]::new($Env:USERNAME, (ConvertTo-SecureString -String $Env:PASSWORD -AsPlainText -Force))) 
-          -appFile ((Get-ChildItem -File *.app).FullName)
+          -appFile ((Get-ChildItem -Path $Env:GITHUB_WORKSPACE -File *.app).FullName)
           -skipVerification
           -sync 
           -install
