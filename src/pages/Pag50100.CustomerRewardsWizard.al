@@ -1,4 +1,4 @@
-page 50100 "Customer Rewards Wizard"
+page 50100 "CONIT Customer Rewards Wizard"
 {
     // Specifies that this page will be a navigate page. 
     PageType = NavigatePage;
