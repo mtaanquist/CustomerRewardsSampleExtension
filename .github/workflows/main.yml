@@ -10,12 +10,6 @@ jobs:
       - name: Install NavContainerHelper
         run: Install-Module NavContainerHelper -Force
         shell: powershell
-      - name: Get module NavContainerHelper
-        run: Get-Module NavContainerHelper
-        shell: powershell
-      - name: List workspace
-        run: ls $Env:GITHUB_WORKSPACE
-        shell: powershell
       - name: Set up Business Central container
         env:
           USERNAME: ${{ secrets.BA_USERNAME }}
@@ -34,7 +28,7 @@ jobs:
           -enableSymbolLoading
           -additionalParameters @("--volume $Env:GITHUB_WORKSPACE`:c:\project")
         shell: powershell
-      - name: Build application
+      - name: Compile extension
         env:
           USERNAME: ${{ secrets.BA_USERNAME }}
           PASSWORD: ${{ secrets.BA_PASSWORD }}    
@@ -45,4 +39,17 @@ jobs:
           -appProjectFolder $Env:GITHUB_WORKSPACE
           -appOutputFolder $Env:GITHUB_WORKSPACE
           -updateSymbols
+        shell: powershell
+      - name: Publish extension
+        env:
+          USERNAME: ${{ secrets.BA_USERNAME }}
+          PASSWORD: ${{ secrets.BA_PASSWORD }}
+        run: >
+          Publish-NavContainerApp 
+          -containerName bcdev 
+          -credential ([PSCredential]::new($Env:USERNAME, (ConvertTo-SecureString -String $Env:PASSWORD -AsPlainText -Force))) 
+          -appFile ((Get-ChildItem -File *.app).FullName)
+          -skipVerification
+          -sync 
+          -install
         shell: powershell
